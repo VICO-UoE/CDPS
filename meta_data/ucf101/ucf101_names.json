@@ -1,0 +1,406 @@
+{
+    "0": {
+        "name": "Apply_Eye_Makeup",
+        "alternates": "Apply_Eye_Makeup"
+    },
+    "1": {
+        "name": "Apply_Lipstick",
+        "alternates": "Apply_Lipstick"
+    },
+    "2": {
+        "name": "Archery",
+        "alternates": "Archery"
+    },
+    "3": {
+        "name": "Baby_Crawling",
+        "alternates": "Baby_Crawling"
+    },
+    "4": {
+        "name": "Balance_Beam",
+        "alternates": "Balance_Beam"
+    },
+    "5": {
+        "name": "Band_Marching",
+        "alternates": "Band_Marching"
+    },
+    "6": {
+        "name": "Baseball_Pitch",
+        "alternates": "Baseball_Pitch"
+    },
+    "7": {
+        "name": "Basketball",
+        "alternates": "Basketball"
+    },
+    "8": {
+        "name": "Basketball_Dunk",
+        "alternates": "Basketball_Dunk"
+    },
+    "9": {
+        "name": "Bench_Press",
+        "alternates": "Bench_Press"
+    },
+    "10": {
+        "name": "Biking",
+        "alternates": "Biking"
+    },
+    "11": {
+        "name": "Billiards",
+        "alternates": "Billiards"
+    },
+    "12": {
+        "name": "Blow_Dry_Hair",
+        "alternates": "Blow_Dry_Hair"
+    },
+    "13": {
+        "name": "Blowing_Candles",
+        "alternates": "Blowing_Candles"
+    },
+    "14": {
+        "name": "Body_Weight_Squats",
+        "alternates": "Body_Weight_Squats"
+    },
+    "15": {
+        "name": "Bowling",
+        "alternates": "Bowling"
+    },
+    "16": {
+        "name": "Boxing_Punching_Bag",
+        "alternates": "Boxing_Punching_Bag"
+    },
+    "17": {
+        "name": "Boxing_Speed_Bag",
+        "alternates": "Boxing_Speed_Bag"
+    },
+    "18": {
+        "name": "Breast_Stroke",
+        "alternates": "Breast_Stroke"
+    },
+    "19": {
+        "name": "Brushing_Teeth",
+        "alternates": "Brushing_Teeth"
+    },
+    "20": {
+        "name": "Clean_And_Jerk",
+        "alternates": "Clean_And_Jerk"
+    },
+    "21": {
+        "name": "Cliff_Diving",
+        "alternates": "Cliff_Diving"
+    },
+    "22": {
+        "name": "Cricket_Bowling",
+        "alternates": "Cricket_Bowling"
+    },
+    "23": {
+        "name": "Cricket_Shot",
+        "alternates": "Cricket_Shot"
+    },
+    "24": {
+        "name": "Cutting_In_Kitchen",
+        "alternates": "Cutting_In_Kitchen"
+    },
+    "25": {
+        "name": "Diving",
+        "alternates": "Diving"
+    },
+    "26": {
+        "name": "Drumming",
+        "alternates": "Drumming"
+    },
+    "27": {
+        "name": "Fencing",
+        "alternates": "Fencing"
+    },
+    "28": {
+        "name": "Field_Hockey_Penalty",
+        "alternates": "Field_Hockey_Penalty"
+    },
+    "29": {
+        "name": "Floor_Gymnastics",
+        "alternates": "Floor_Gymnastics"
+    },
+    "30": {
+        "name": "Frisbee_Catch",
+        "alternates": "Frisbee_Catch"
+    },
+    "31": {
+        "name": "Front_Crawl",
+        "alternates": "Front_Crawl"
+    },
+    "32": {
+        "name": "Golf_Swing",
+        "alternates": "Golf_Swing"
+    },
+    "33": {
+        "name": "Haircut",
+        "alternates": "Haircut"
+    },
+    "34": {
+        "name": "Hammering",
+        "alternates": "Hammering"
+    },
+    "35": {
+        "name": "Hammer_Throw",
+        "alternates": "Hammer_Throw"
+    },
+    "36": {
+        "name": "Handstand_Pushups",
+        "alternates": "Handstand_Pushups"
+    },
+    "37": {
+        "name": "Handstand_Walking",
+        "alternates": "Handstand_Walking"
+    },
+    "38": {
+        "name": "Head_Massage",
+        "alternates": "Head_Massage"
+    },
+    "39": {
+        "name": "High_Jump",
+        "alternates": "High_Jump"
+    },
+    "40": {
+        "name": "Horse_Race",
+        "alternates": "Horse_Race"
+    },
+    "41": {
+        "name": "Horse_Riding",
+        "alternates": "Horse_Riding"
+    },
+    "42": {
+        "name": "Hula_Hoop",
+        "alternates": "Hula_Hoop"
+    },
+    "43": {
+        "name": "Ice_Dancing",
+        "alternates": "Ice_Dancing"
+    },
+    "44": {
+        "name": "Javelin_Throw",
+        "alternates": "Javelin_Throw"
+    },
+    "45": {
+        "name": "Juggling_Balls",
+        "alternates": "Juggling_Balls"
+    },
+    "46": {
+        "name": "Jumping_Jack",
+        "alternates": "Jumping_Jack"
+    },
+    "47": {
+        "name": "Jump_Rope",
+        "alternates": "Jump_Rope"
+    },
+    "48": {
+        "name": "Kayaking",
+        "alternates": "Kayaking"
+    },
+    "49": {
+        "name": "Knitting",
+        "alternates": "Knitting"
+    },
+    "50": {
+        "name": "Long_Jump",
+        "alternates": "Long_Jump"
+    },
+    "51": {
+        "name": "Lunges",
+        "alternates": "Lunges"
+    },
+    "52": {
+        "name": "Military_Parade",
+        "alternates": "Military_Parade"
+    },
+    "53": {
+        "name": "Mixing",
+        "alternates": "Mixing"
+    },
+    "54": {
+        "name": "Mopping_Floor",
+        "alternates": "Mopping_Floor"
+    },
+    "55": {
+        "name": "Nunchucks",
+        "alternates": "Nunchucks"
+    },
+    "56": {
+        "name": "Parallel_Bars",
+        "alternates": "Parallel_Bars"
+    },
+    "57": {
+        "name": "Pizza_Tossing",
+        "alternates": "Pizza_Tossing"
+    },
+    "58": {
+        "name": "Playing_Cello",
+        "alternates": "Playing_Cello"
+    },
+    "59": {
+        "name": "Playing_Daf",
+        "alternates": "Playing_Daf"
+    },
+    "60": {
+        "name": "Playing_Dhol",
+        "alternates": "Playing_Dhol"
+    },
+    "61": {
+        "name": "Playing_Flute",
+        "alternates": "Playing_Flute"
+    },
+    "62": {
+        "name": "Playing_Guitar",
+        "alternates": "Playing_Guitar"
+    },
+    "63": {
+        "name": "Playing_Piano",
+        "alternates": "Playing_Piano"
+    },
+    "64": {
+        "name": "Playing_Sitar",
+        "alternates": "Playing_Sitar"
+    },
+    "65": {
+        "name": "Playing_Tabla",
+        "alternates": "Playing_Tabla"
+    },
+    "66": {
+        "name": "Playing_Violin",
+        "alternates": "Playing_Violin"
+    },
+    "67": {
+        "name": "Pole_Vault",
+        "alternates": "Pole_Vault"
+    },
+    "68": {
+        "name": "Pommel_Horse",
+        "alternates": "Pommel_Horse"
+    },
+    "69": {
+        "name": "Pull_Ups",
+        "alternates": "Pull_Ups"
+    },
+    "70": {
+        "name": "Punch",
+        "alternates": "Punch"
+    },
+    "71": {
+        "name": "Push_Ups",
+        "alternates": "Push_Ups"
+    },
+    "72": {
+        "name": "Rafting",
+        "alternates": "Rafting"
+    },
+    "73": {
+        "name": "Rock_Climbing_Indoor",
+        "alternates": "Rock_Climbing_Indoor"
+    },
+    "74": {
+        "name": "Rope_Climbing",
+        "alternates": "Rope_Climbing"
+    },
+    "75": {
+        "name": "Rowing",
+        "alternates": "Rowing"
+    },
+    "76": {
+        "name": "Salsa_Spin",
+        "alternates": "Salsa_Spin"
+    },
+    "77": {
+        "name": "Shaving_Beard",
+        "alternates": "Shaving_Beard"
+    },
+    "78": {
+        "name": "Shotput",
+        "alternates": "Shotput"
+    },
+    "79": {
+        "name": "Skate_Boarding",
+        "alternates": "Skate_Boarding"
+    },
+    "80": {
+        "name": "Skiing",
+        "alternates": "Skiing"
+    },
+    "81": {
+        "name": "Skijet",
+        "alternates": "Skijet"
+    },
+    "82": {
+        "name": "Sky_Diving",
+        "alternates": "Sky_Diving"
+    },
+    "83": {
+        "name": "Soccer_Juggling",
+        "alternates": "Soccer_Juggling"
+    },
+    "84": {
+        "name": "Soccer_Penalty",
+        "alternates": "Soccer_Penalty"
+    },
+    "85": {
+        "name": "Still_Rings",
+        "alternates": "Still_Rings"
+    },
+    "86": {
+        "name": "Sumo_Wrestling",
+        "alternates": "Sumo_Wrestling"
+    },
+    "87": {
+        "name": "Surfing",
+        "alternates": "Surfing"
+    },
+    "88": {
+        "name": "Swing",
+        "alternates": "Swing"
+    },
+    "89": {
+        "name": "Table_Tennis_Shot",
+        "alternates": "Table_Tennis_Shot"
+    },
+    "90": {
+        "name": "Tai_Chi",
+        "alternates": "Tai_Chi"
+    },
+    "91": {
+        "name": "Tennis_Swing",
+        "alternates": "Tennis_Swing"
+    },
+    "92": {
+        "name": "Throw_Discus",
+        "alternates": "Throw_Discus"
+    },
+    "93": {
+        "name": "Trampoline_Jumping",
+        "alternates": "Trampoline_Jumping"
+    },
+    "94": {
+        "name": "Typing",
+        "alternates": "Typing"
+    },
+    "95": {
+        "name": "Uneven_Bars",
+        "alternates": "Uneven_Bars"
+    },
+    "96": {
+        "name": "Volleyball_Spiking",
+        "alternates": "Volleyball_Spiking"
+    },
+    "97": {
+        "name": "Walking_With_Dog",
+        "alternates": "Walking_With_Dog"
+    },
+    "98": {
+        "name": "Wall_Pushups",
+        "alternates": "Wall_Pushups"
+    },
+    "99": {
+        "name": "Writing_On_Board",
+        "alternates": "Writing_On_Board"
+    },
+    "100": {
+        "name": "Yo_Yo",
+        "alternates": "Yo_Yo"
+    }
+}

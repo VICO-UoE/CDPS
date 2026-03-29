@@ -1,0 +1,402 @@
+{
+    "0": {
+        "name": "face",
+        "alternates": "face"
+    },
+    "1": {
+        "name": "leopard",
+        "alternates": "leopard"
+    },
+    "2": {
+        "name": "motorbike",
+        "alternates": "motorbike"
+    },
+    "3": {
+        "name": "accordion",
+        "alternates": "accordion"
+    },
+    "4": {
+        "name": "airplane",
+        "alternates": "airplane"
+    },
+    "5": {
+        "name": "anchor",
+        "alternates": "anchor"
+    },
+    "6": {
+        "name": "ant",
+        "alternates": "ant"
+    },
+    "7": {
+        "name": "barrel",
+        "alternates": "barrel"
+    },
+    "8": {
+        "name": "bass",
+        "alternates": "bass"
+    },
+    "9": {
+        "name": "beaver",
+        "alternates": "beaver"
+    },
+    "10": {
+        "name": "binocular",
+        "alternates": "binocular"
+    },
+    "11": {
+        "name": "bonsai",
+        "alternates": "bonsai"
+    },
+    "12": {
+        "name": "brain",
+        "alternates": "brain"
+    },
+    "13": {
+        "name": "brontosaurus",
+        "alternates": "brontosaurus"
+    },
+    "14": {
+        "name": "buddha",
+        "alternates": "buddha"
+    },
+    "15": {
+        "name": "butterfly",
+        "alternates": "butterfly"
+    },
+    "16": {
+        "name": "camera",
+        "alternates": "camera"
+    },
+    "17": {
+        "name": "cannon",
+        "alternates": "cannon"
+    },
+    "18": {
+        "name": "car_side",
+        "alternates": "car_side"
+    },
+    "19": {
+        "name": "ceiling_fan",
+        "alternates": "ceiling_fan"
+    },
+    "20": {
+        "name": "cellphone",
+        "alternates": "cellphone"
+    },
+    "21": {
+        "name": "chair",
+        "alternates": "chair"
+    },
+    "22": {
+        "name": "chandelier",
+        "alternates": "chandelier"
+    },
+    "23": {
+        "name": "cougar_body",
+        "alternates": "cougar_body"
+    },
+    "24": {
+        "name": "cougar_face",
+        "alternates": "cougar_face"
+    },
+    "25": {
+        "name": "crab",
+        "alternates": "crab"
+    },
+    "26": {
+        "name": "crayfish",
+        "alternates": "crayfish"
+    },
+    "27": {
+        "name": "crocodile",
+        "alternates": "crocodile"
+    },
+    "28": {
+        "name": "crocodile_head",
+        "alternates": "crocodile_head"
+    },
+    "29": {
+        "name": "cup",
+        "alternates": "cup"
+    },
+    "30": {
+        "name": "dalmatian",
+        "alternates": "dalmatian"
+    },
+    "31": {
+        "name": "dollar_bill",
+        "alternates": "dollar_bill"
+    },
+    "32": {
+        "name": "dolphin",
+        "alternates": "dolphin"
+    },
+    "33": {
+        "name": "dragonfly",
+        "alternates": "dragonfly"
+    },
+    "34": {
+        "name": "electric_guitar",
+        "alternates": "electric_guitar"
+    },
+    "35": {
+        "name": "elephant",
+        "alternates": "elephant"
+    },
+    "36": {
+        "name": "emu",
+        "alternates": "emu"
+    },
+    "37": {
+        "name": "euphonium",
+        "alternates": "euphonium"
+    },
+    "38": {
+        "name": "ewer",
+        "alternates": "ewer"
+    },
+    "39": {
+        "name": "ferry",
+        "alternates": "ferry"
+    },
+    "40": {
+        "name": "flamingo",
+        "alternates": "flamingo"
+    },
+    "41": {
+        "name": "flamingo_head",
+        "alternates": "flamingo_head"
+    },
+    "42": {
+        "name": "garfield",
+        "alternates": "garfield"
+    },
+    "43": {
+        "name": "gerenuk",
+        "alternates": "gerenuk"
+    },
+    "44": {
+        "name": "gramophone",
+        "alternates": "gramophone"
+    },
+    "45": {
+        "name": "grand_piano",
+        "alternates": "grand_piano"
+    },
+    "46": {
+        "name": "hawksbill",
+        "alternates": "hawksbill"
+    },
+    "47": {
+        "name": "headphone",
+        "alternates": "headphone"
+    },
+    "48": {
+        "name": "hedgehog",
+        "alternates": "hedgehog"
+    },
+    "49": {
+        "name": "helicopter",
+        "alternates": "helicopter"
+    },
+    "50": {
+        "name": "ibis",
+        "alternates": "ibis"
+    },
+    "51": {
+        "name": "inline_skate",
+        "alternates": "inline_skate"
+    },
+    "52": {
+        "name": "joshua_tree",
+        "alternates": "joshua_tree"
+    },
+    "53": {
+        "name": "kangaroo",
+        "alternates": "kangaroo"
+    },
+    "54": {
+        "name": "ketch",
+        "alternates": "ketch"
+    },
+    "55": {
+        "name": "lamp",
+        "alternates": "lamp"
+    },
+    "56": {
+        "name": "laptop",
+        "alternates": "laptop"
+    },
+    "57": {
+        "name": "llama",
+        "alternates": "llama"
+    },
+    "58": {
+        "name": "lobster",
+        "alternates": "lobster"
+    },
+    "59": {
+        "name": "lotus",
+        "alternates": "lotus"
+    },
+    "60": {
+        "name": "mandolin",
+        "alternates": "mandolin"
+    },
+    "61": {
+        "name": "mayfly",
+        "alternates": "mayfly"
+    },
+    "62": {
+        "name": "menorah",
+        "alternates": "menorah"
+    },
+    "63": {
+        "name": "metronome",
+        "alternates": "metronome"
+    },
+    "64": {
+        "name": "minaret",
+        "alternates": "minaret"
+    },
+    "65": {
+        "name": "nautilus",
+        "alternates": "nautilus"
+    },
+    "66": {
+        "name": "octopus",
+        "alternates": "octopus"
+    },
+    "67": {
+        "name": "okapi",
+        "alternates": "okapi"
+    },
+    "68": {
+        "name": "pagoda",
+        "alternates": "pagoda"
+    },
+    "69": {
+        "name": "panda",
+        "alternates": "panda"
+    },
+    "70": {
+        "name": "pigeon",
+        "alternates": "pigeon"
+    },
+    "71": {
+        "name": "pizza",
+        "alternates": "pizza"
+    },
+    "72": {
+        "name": "platypus",
+        "alternates": "platypus"
+    },
+    "73": {
+        "name": "pyramid",
+        "alternates": "pyramid"
+    },
+    "74": {
+        "name": "revolver",
+        "alternates": "revolver"
+    },
+    "75": {
+        "name": "rhino",
+        "alternates": "rhino"
+    },
+    "76": {
+        "name": "rooster",
+        "alternates": "rooster"
+    },
+    "77": {
+        "name": "saxophone",
+        "alternates": "saxophone"
+    },
+    "78": {
+        "name": "schooner",
+        "alternates": "schooner"
+    },
+    "79": {
+        "name": "scissors",
+        "alternates": "scissors"
+    },
+    "80": {
+        "name": "scorpion",
+        "alternates": "scorpion"
+    },
+    "81": {
+        "name": "sea_horse",
+        "alternates": "sea_horse"
+    },
+    "82": {
+        "name": "snoopy",
+        "alternates": "snoopy"
+    },
+    "83": {
+        "name": "soccer_ball",
+        "alternates": "soccer_ball"
+    },
+    "84": {
+        "name": "stapler",
+        "alternates": "stapler"
+    },
+    "85": {
+        "name": "starfish",
+        "alternates": "starfish"
+    },
+    "86": {
+        "name": "stegosaurus",
+        "alternates": "stegosaurus"
+    },
+    "87": {
+        "name": "stop_sign",
+        "alternates": "stop_sign"
+    },
+    "88": {
+        "name": "strawberry",
+        "alternates": "strawberry"
+    },
+    "89": {
+        "name": "sunflower",
+        "alternates": "sunflower"
+    },
+    "90": {
+        "name": "tick",
+        "alternates": "tick"
+    },
+    "91": {
+        "name": "trilobite",
+        "alternates": "trilobite"
+    },
+    "92": {
+        "name": "umbrella",
+        "alternates": "umbrella"
+    },
+    "93": {
+        "name": "watch",
+        "alternates": "watch"
+    },
+    "94": {
+        "name": "water_lilly",
+        "alternates": "water_lilly"
+    },
+    "95": {
+        "name": "wheelchair",
+        "alternates": "wheelchair"
+    },
+    "96": {
+        "name": "wild_cat",
+        "alternates": "wild_cat"
+    },
+    "97": {
+        "name": "windsor_chair",
+        "alternates": "windsor_chair"
+    },
+    "98": {
+        "name": "wrench",
+        "alternates": "wrench"
+    },
+    "99": {
+        "name": "yin_yang",
+        "alternates": "yin_yang"
+    }
+}

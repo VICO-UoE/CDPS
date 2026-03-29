@@ -1,0 +1,10 @@
+./datasets/eurosat/EuroSAT_RGB/AnnualCrop/AnnualCrop_833.jpg 0 
+./datasets/eurosat/EuroSAT_RGB/Forest/Forest_910.jpg 1 
+./datasets/eurosat/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1650.jpg 2 
+./datasets/eurosat/EuroSAT_RGB/Highway/Highway_2482.jpg 3 
+./datasets/eurosat/EuroSAT_RGB/Industrial/Industrial_1908.jpg 4 
+./datasets/eurosat/EuroSAT_RGB/Pasture/Pasture_830.jpg 5 
+./datasets/eurosat/EuroSAT_RGB/PermanentCrop/PermanentCrop_1448.jpg 6 
+./datasets/eurosat/EuroSAT_RGB/Residential/Residential_1949.jpg 7 
+./datasets/eurosat/EuroSAT_RGB/River/River_236.jpg 8 
+./datasets/eurosat/EuroSAT_RGB/SeaLake/SeaLake_723.jpg 9 
