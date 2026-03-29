@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ```
 
 ### Dataset
-Follow [Dataset.md] to download the 12 datasets.
+Follow [Dataset.md](https://github.com/VICO-UoE/CDPS/blob/main/datasets/dataset.md) to download the 12 datasets.
 
 ## Numerical Results
 ## Get Started
