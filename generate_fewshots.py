@@ -153,6 +153,7 @@ for num_shot in NUM_SHOTS:
                 f.write(f"{img_pathes[idx]} {labels[idx]} \n")
 
 test_txt = os.path.join(args.meta_root, args.dataset, f"test.txt")
-with open(test_txt, "w") as f:
-    for im_path, label in zip(test_im_pathes, test_labels):
-        f.write(f"{im_path} {label}\n")
+if not os.path.exists(test_txt):
+    with open(test_txt, "w") as f:
+        for im_path, label in zip(test_im_pathes, test_labels):
+            f.write(f"{im_path} {label}\n")

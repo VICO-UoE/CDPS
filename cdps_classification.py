@@ -14,13 +14,18 @@ def load_caches(args, test=False):
             file_name_template = f"{root}" + "/test_{}_batch{}.pt"
         else:
             file_name_template = (
-                f"{root}" + "/train_{}" + f"_fewshot{args.fewshot}" + "_batch{}.pt"
+                f"{root}"
+                + "/train_{}"
+                + f"_fewshot{args.fewshot}_seed{args.seed}"
+                + "_batch{}.pt"
             )
     else:
         if test:
             file_name_template = f"{root}" + "/test_{}.pt"
         else:
-            file_name_template = f"{root}" + "/train_{}" + f"_fewshot{args.fewshot}.pt"
+            file_name_template = (
+                f"{root}" + "/train_{}" + f"_fewshot{args.fewshot}_seed{args.seed}.pt"
+            )
 
     if args.dataset == "imagenet":
         feats, global_feats, mask, logits, labels = [], [], [], [], []
@@ -258,13 +263,19 @@ train_patch_logits = compute_patch_logits(
     num_classes,
     device=args.device,
     is_train=True,
+    bsz=args.batch_size,
     labels=train_labels,
     fewshot=args.fewshot,
     topk=args.topk,
 )
 
 test_patch_logits = compute_patch_logits(
-    masked_test_feats, cdps_feats, num_classes, device=args.device, topk=args.topk
+    masked_test_feats,
+    cdps_feats,
+    num_classes,
+    device=args.device,
+    topk=args.topk,
+    bsz=args.batch_size,
 )
 
 print("Finding best lambda...")
@@ -278,4 +289,4 @@ print(f"test acc: {acc}")
 
 with open(args.output_file, "a") as f:
     f.write(f"-------------{args.dataset}-------------\n")
-    f.write(f"fewshot: {args.fewshot}, accuracy: {acc}\n \n")
+    f.write(f"fewshot: {args.fewshot}, seed: {args.seed}, accuracy: {acc*100:.2f}\n \n")

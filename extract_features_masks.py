@@ -226,28 +226,41 @@ if args.dataset == "imagenet":
         print(f"Save train_{i} caches...")
         torch.save(
             train_feats.cpu(),
-            os.path.join(save_path, f"train_feats_fewshot{args.fewshot}_batch{i}.pt"),
+            os.path.join(
+                save_path,
+                f"train_feats_fewshot{args.fewshot}_seed{args.seed}_batch{i}.pt",
+            ),
         )
         torch.save(
             train_global_feats.cpu(),
             os.path.join(
-                save_path, f"train_global_feats_fewshot{args.fewshot}_batch{i}.pt"
+                save_path,
+                f"train_global_feats_fewshot{args.fewshot}_seed{args.seed}_batch{i}.pt",
             ),
         )
         torch.save(
             train_mask,
-            os.path.join(save_path, f"train_mask_fewshot{args.fewshot}_batch{i}.pt"),
+            os.path.join(
+                save_path,
+                f"train_mask_fewshot{args.fewshot}_seed{args.seed}_batch{i}.pt",
+            ),
         )
         torch.save(
             train_logits.cpu(),
             os.path.join(
-                save_path, f"train_text_logits_fewshot{args.fewshot}_batch{i}.pt"
+                save_path,
+                f"train_text_logits_fewshot{args.fewshot}_seed{args.seed}_batch{i}.pt",
             ),
         )
         torch.save(
             sub_labels[i],
-            os.path.join(save_path, f"train_labels_fewshot{args.fewshot}_batch{i}.pt"),
+            os.path.join(
+                save_path,
+                f"train_labels_fewshot{args.fewshot}_seed{args.seed}_batch{i}.pt",
+            ),
         )
+        if os.path.exists(os.path.join(save_path, f"test_feats_batch{i}.pt")):
+            continue
         test_feats, test_attn_weights, test_global_feats = extract_features_masks(
             model, sub_testloaders[i], args.device, loader_id=f"test_{i}"
         )
@@ -296,39 +309,54 @@ else:
     print("Save train caches...")
     torch.save(
         train_feats.cpu(),
-        os.path.join(save_path, f"train_feats_fewshot{args.fewshot}.pt"),
+        os.path.join(
+            save_path, f"train_feats_fewshot{args.fewshot}_seed{args.seed}.pt"
+        ),
     )
     torch.save(
         train_global_feats.cpu(),
-        os.path.join(save_path, f"train_global_feats_fewshot{args.fewshot}.pt"),
+        os.path.join(
+            save_path, f"train_global_feats_fewshot{args.fewshot}_seed{args.seed}.pt"
+        ),
     )
     torch.save(
-        train_mask, os.path.join(save_path, f"train_mask_fewshot{args.fewshot}.pt")
+        train_mask,
+        os.path.join(save_path, f"train_mask_fewshot{args.fewshot}_seed{args.seed}.pt"),
     )
     torch.save(
         train_logits.cpu(),
-        os.path.join(save_path, f"train_text_logits_fewshot{args.fewshot}.pt"),
+        os.path.join(
+            save_path, f"train_text_logits_fewshot{args.fewshot}_seed{args.seed}.pt"
+        ),
     )
     torch.save(
-        train_labels, os.path.join(save_path, f"train_labels_fewshot{args.fewshot}.pt")
+        train_labels,
+        os.path.join(
+            save_path, f"train_labels_fewshot{args.fewshot}_seed{args.seed}.pt"
+        ),
     )
 
-    test_feats, test_attn_weights, test_global_feats = extract_features_masks(
-        model, test_loader, args.device, loader_id="test"
-    )
-    test_mask = get_mask(
-        test_attn_weights,
-        num_patches,
-        args.num_area,
-        args.top_percent,
-        args.topk,
-        loader_id="test",
-    )
-    test_logits = get_logits(test_global_feats, prompts, args.device, loader_id="test")
+    if not os.path.exists(os.path.join(save_path, "test_feats.pt")):
+        test_feats, test_attn_weights, test_global_feats = extract_features_masks(
+            model, test_loader, args.device, loader_id="test"
+        )
+        test_mask = get_mask(
+            test_attn_weights,
+            num_patches,
+            args.num_area,
+            args.top_percent,
+            args.topk,
+            loader_id="test",
+        )
+        test_logits = get_logits(
+            test_global_feats, prompts, args.device, loader_id="test"
+        )
 
-    print("Save test caches...")
-    torch.save(test_feats.cpu(), os.path.join(save_path, "test_feats.pt"))
-    torch.save(test_global_feats.cpu(), os.path.join(save_path, "test_global_feats.pt"))
-    torch.save(test_mask, os.path.join(save_path, "test_mask.pt"))
-    torch.save(test_logits.cpu(), os.path.join(save_path, "test_text_logits.pt"))
-    torch.save(test_labels, os.path.join(save_path, "test_labels.pt"))
+        print("Save test caches...")
+        torch.save(test_feats.cpu(), os.path.join(save_path, "test_feats.pt"))
+        torch.save(
+            test_global_feats.cpu(), os.path.join(save_path, "test_global_feats.pt")
+        )
+        torch.save(test_mask, os.path.join(save_path, "test_mask.pt"))
+        torch.save(test_logits.cpu(), os.path.join(save_path, "test_text_logits.pt"))
+        torch.save(test_labels, os.path.join(save_path, "test_labels.pt"))
