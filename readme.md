@@ -18,8 +18,9 @@ Follow [Dataset.md](https://github.com/VICO-UoE/CDPS/blob/main/datasets/dataset.
 See [Results](https://github.com/VICO-UoE/CDPS/blob/main/datasets/Results.xlsx) for detailed numbers.
 
 ## Get Started
-### Get fewshot and test samples
-Run the following code to generate txt files which contains the path of fewshot and test samples:
+### Get fewshot and test samples [Optional]
+We provided the fewshot and test samples in `meta_data`.
+If you want to create your own samples, run the following code to generate txt files:
 ```
 python generate_fewshots.py --dataset eurosat
 ```
