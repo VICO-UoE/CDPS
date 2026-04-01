@@ -15,6 +15,8 @@ pip install -r requirements.txt
 Follow [Dataset.md](https://github.com/VICO-UoE/CDPS/blob/main/datasets/dataset.md) to download the 12 datasets.
 
 ## Numerical Results
+See [Results](https://github.com/VICO-UoE/CDPS/blob/main/datasets/Results.xlsx) for detailed numbers.
+
 ## Get Started
 ### Get fewshot and test samples
 Run the following code to generate txt files which contains the path of fewshot and test samples:
