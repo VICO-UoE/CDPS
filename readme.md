@@ -1,6 +1,20 @@
-# CDPS
+<p align="center">
+  <h1 align="center">Training-free Discriminative Patch Mining for Robust Few-Shot Recognition with CLIP
+</h1>
+  <p align="center">
+    <a href="[https://zpdu.github.io/](https://zhenzhang-ye.github.io/)">Zhenzhang Ye</a>
+    ·
+    <a href="https://danier97.github.io/">Duolikun Danier</a>
+    ·
+    <a href="https://www.bozhao.me/">Bo Zhao</a>
+    ·
+    <a href="https://homepages.inf.ed.ac.uk/hbilen/">Hakan Bilen</a>
+  </p>
+  <p align="center">
+    ECCV 2026
+  </p>
 
-Pytorch Implementation of Class-Discriminative Patch Sets [CDPS]
+  PyTorch implementation of Training-free Discriminative Patch Mining for Robust Few-Shot Recognition with CLIP [[Paper](https://groups.inf.ed.ac.uk/vico/assets/pdf/Ye26.pdf)].
 
 ## Requirements
 ### Environment
