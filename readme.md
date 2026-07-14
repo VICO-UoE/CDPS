@@ -2,7 +2,7 @@
   <h1 align="center">Training-free Discriminative Patch Mining for Robust Few-Shot Recognition with CLIP
 </h1>
   <p align="center">
-    <a href="[https://zpdu.github.io/](https://zhenzhang-ye.github.io/)">Zhenzhang Ye</a>
+    <a href="https://zhenzhang-ye.github.io/">Zhenzhang Ye</a>
     ·
     <a href="https://danier97.github.io/">Duolikun Danier</a>
     ·
