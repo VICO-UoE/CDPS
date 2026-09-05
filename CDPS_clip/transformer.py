@@ -635,8 +635,12 @@ class Transformer(nn.Module):
                 x = checkpoint(r, x, None, None, attn_mask, use_reentrant=False)
             else:
                 x = r(x, attn_mask=attn_mask, last_layer=(i == len(self.resblocks) - 1))
-            self.feats_each_layer.append(x)
-            self.attn_each_layer.append(r.record_weight[:, 0, 1:].detach())
+            # Feature extraction only needs the final vision-transformer
+            # layer. Keep the historical all-layer behavior by default, while
+            # allowing callers to avoid retaining unused intermediate tensors.
+            if getattr(self, "record_all_layers", True) or i == len(self.resblocks) - 1:
+                self.feats_each_layer.append(x)
+                self.attn_each_layer.append(r.record_weight[:, 0, 1:].detach())
 
         if not self.batch_first:
             x = x.transpose(0, 1)  # LND -> NLD

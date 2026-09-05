@@ -5,6 +5,7 @@ import argparse
 import torch
 import json
 from tqdm import tqdm
+from collections import deque
 
 
 def get_logits(global_feats, prompts, device, loader_id):
@@ -29,12 +30,12 @@ def get_mask(attn_weights, num_patches, tgt_area, top_percent, topk, loader_id):
         for i in range(num_patches):
             for j in range(num_patches):
                 if labels[i, j] == 1:
-                    queue = [(i, j)]
+                    queue = deque([(i, j)])
                     visited[i, j] = 1
                     sequence = [(i, j)]
                     area = 1
                     while queue:
-                        x, y = queue.pop(0)
+                        x, y = queue.popleft()
                         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                             nx, ny = x + dx, y + dy
                             if (
@@ -65,9 +66,8 @@ def get_mask(attn_weights, num_patches, tgt_area, top_percent, topk, loader_id):
     pbar = tqdm(attn_weights, total=len(attn_weights), desc=f"Get mask of {loader_id}")
     for weight in pbar:
         labels = torch.zeros(num_patches * num_patches, dtype=torch.float32)
-        idx = torch.argsort(weight.reshape(-1), descending=True)[
-            : int(num_patches * num_patches * top_percent)
-        ]
+        num_selected = max(1, int(num_patches * num_patches * top_percent))
+        idx = torch.topk(weight.reshape(-1), k=num_selected, sorted=False).indices
         labels[idx] = 1.0
         labels = labels.reshape(num_patches, num_patches)
         labels = bfs(labels)
@@ -86,9 +86,9 @@ def extract_features_masks(model, dataloader, device, loader_id):
         total=len(dataloader),
         desc=f"Extract Feature of {loader_id}",
     )
-    with torch.no_grad():
+    with torch.inference_mode():
         for i, (images, labels, _) in pbar:
-            images = images.to(device)
+            images = images.to(device, non_blocking=device == "cuda")
             global_feat = model.visual(images)
             global_feat /= global_feat.norm(dim=-1, keepdim=True)
             global_feats.append(global_feat.detach().clone())
@@ -115,6 +115,7 @@ parser.add_argument("--meta_root", type=str, default="meta_data")
 parser.add_argument("--seed", type=int, default=1)
 parser.add_argument("--fewshot", type=int, default=4)
 parser.add_argument("--batch_size", type=int, default=32)
+parser.add_argument("--num_workers", type=int, default=0)
 parser.add_argument("--model_cfg", type=str, default="vitb16_openclip_laion2b")
 parser.add_argument("--cache_path", type=str, default="./caches")
 parser.add_argument("--num_area", type=int, default=2)
@@ -136,13 +137,17 @@ with open(metric_file, "r") as f:
 
 save_path = os.path.join(args.cache_path, args.model_cfg, args.dataset)
 os.makedirs(save_path, exist_ok=True)
-if not os.path.exists(
-    os.path.join(save_path, "test_global_feats.pt") or args.force_test_compute
+if args.force_test_compute or not os.path.exists(
+    os.path.join(save_path, "test_global_feats.pt")
 ):
     args.force_test_compute = True
 num_patches = 14 if "16" in args.model_cfg else 7
 
 model, preprocess, tokenizer = get_models(args)
+# Only the final visual-transformer layer is consumed below. Avoid retaining
+# every intermediate layer for every batch during feature extraction.
+if hasattr(model.visual, "transformer"):
+    model.visual.transformer.record_all_layers = False
 
 dataset = WarpDataset(
     args.meta_root,
@@ -173,7 +178,12 @@ if args.dataset == "imagenet":
         sub_datasets.append(subset)
         sub_loaders.append(
             torch.utils.data.DataLoader(
-                subset, batch_size=args.batch_size, shuffle=False
+                subset,
+                batch_size=args.batch_size,
+                shuffle=False,
+                num_workers=args.num_workers,
+                pin_memory=args.device == "cuda",
+                persistent_workers=args.num_workers > 0,
             )
         )
     sub_labels = [
@@ -189,17 +199,32 @@ if args.dataset == "imagenet":
         sub_testsets.append(subset)
         sub_testloaders.append(
             torch.utils.data.DataLoader(
-                subset, batch_size=args.batch_size, shuffle=False
+                subset,
+                batch_size=args.batch_size,
+                shuffle=False,
+                num_workers=args.num_workers,
+                pin_memory=args.device == "cuda",
+                persistent_workers=args.num_workers > 0,
             )
         )
         sub_testlabels.append(test_labels[indexes])
 else:
     dataloader = torch.utils.data.DataLoader(
-        dataset, batch_size=args.batch_size, shuffle=False, num_workers=0
+        dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=args.num_workers,
+        pin_memory=args.device == "cuda",
+        persistent_workers=args.num_workers > 0,
     )
 
     test_loader = torch.utils.data.DataLoader(
-        test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=0
+        test_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=args.num_workers,
+        pin_memory=args.device == "cuda",
+        persistent_workers=args.num_workers > 0,
     )
     test_labels = torch.tensor(test_dataset.labels)
 

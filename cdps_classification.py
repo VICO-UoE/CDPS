@@ -64,13 +64,25 @@ def mask_filter(feats, masks, load_files=False):
     return feats_vec
 
 
+@torch.no_grad()
 def construct_cdps_feats(
-    feats, global_feats, num_classes, omega, num_confuse, labels, topk, load_files=False
+    feats,
+    global_feats,
+    num_classes,
+    omega,
+    num_confuse,
+    labels,
+    topk,
+    load_files=False,
+    class_indices=None,
 ):
+    if class_indices is None:
+        class_indices = [np.flatnonzero(labels == cls) for cls in range(num_classes)]
+
     def get_confuse_groups(global_feats, num_classes, labels):
         confuse_ids = []
         for cls in range(num_classes):
-            cls_inds = np.where(labels == cls)[0]
+            cls_inds = class_indices[cls]
             cls_global_feats = global_feats[cls_inds]
             other_cls_inds = np.where(labels != cls)[0]
             other_labels = labels[other_cls_inds]
@@ -78,16 +90,19 @@ def construct_cdps_feats(
             similarity = cls_global_feats @ other_global_feats.t()
 
             sort_index = torch.argsort(similarity, dim=1, descending=True)
+            # The original nested loop scans the sorted columns column-wise.
+            # Flatten the same traversal once on CPU to avoid repeated scalar
+            # device transfers and Python list membership checks on tensors.
+            ranked_labels = other_labels[sort_index.T.reshape(-1)].detach().cpu().numpy()
             confuse_id = []
-            for col_id in range(sort_index.shape[1]):
-                if len(confuse_id) >= num_confuse:
-                    break
-                for row_id in range(sort_index.shape[0]):
+            seen_labels = set()
+            for cur_label in ranked_labels:
+                cur_label = int(cur_label)
+                if cur_label not in seen_labels:
+                    seen_labels.add(cur_label)
+                    confuse_id.append(cur_label)
                     if len(confuse_id) >= num_confuse:
                         break
-                    cur_label = other_labels[sort_index[row_id, col_id].cpu().numpy()]
-                    if cur_label not in confuse_id:
-                        confuse_id.append(cur_label)
             confuse_id = np.array(confuse_id)
             confuse_ids.append(confuse_id)
         confuse_ids = np.stack(confuse_ids, axis=0)
@@ -103,7 +118,7 @@ def construct_cdps_feats(
     feats_list = []
     pbar = tqdm(range(num_classes), desc="Construct CDPS Feats of Each Class")
     for cls in pbar:
-        cls_inds = np.where(labels == cls)[0]
+        cls_inds = class_indices[cls]
         concat_feats = []
         indexes = [0]
         for cls_ind in cls_inds:
@@ -121,7 +136,7 @@ def construct_cdps_feats(
         other_concat_feats = []
         other_indexes = [0]
         for other_cls in confuse_ids[cls]:
-            other_cls_ids = np.where(labels == other_cls)[0]
+            other_cls_ids = class_indices[other_cls]
             for other_cls_id in other_cls_ids:
                 c_feat = feats[other_cls_id]
                 other_concat_feats.append(c_feat)
@@ -145,6 +160,7 @@ def construct_cdps_feats(
     return torch.stack(feats_list, dim=0)
 
 
+@torch.no_grad()
 def compute_patch_logits(
     feats,
     cdps_feats,
@@ -155,45 +171,49 @@ def compute_patch_logits(
     is_train=False,
     labels=None,
     fewshot=0,
+    class_indices=None,
 ):
     assert (labels is not None and is_train and fewshot > 0) or not is_train
     logits = []
+    if is_train and class_indices is None:
+        class_indices = [np.flatnonzero(labels == cls) for cls in range(num_classes)]
+    cdps_feats = cdps_feats.to(device)
+
+    # These class blocks are identical for every image batch. Build them once
+    # instead of repeatedly slicing/stacking features and reconstructing the
+    # training-image lookup tensor inside the nested loop.
+    class_blocks = []
+    for cls in range(0, num_classes, bsz):
+        cls_end = min(cls + bsz, num_classes)
+        sample_locations = None
+        if is_train:
+            sample_locations = {}
+            for row_id, class_id in enumerate(range(cls, cls_end)):
+                for col_id, sample_id in enumerate(class_indices[class_id]):
+                    sample_locations[int(sample_id)] = (row_id, col_id)
+        class_blocks.append(
+            (cdps_feats[cls:cls_end].unsqueeze(0), sample_locations)
+        )
 
     pbar = tqdm(range(0, len(feats), bsz), desc="Compute Patch Logits")
     for i in pbar:
         concat_feats = []
-        concat_img_id = []
         indexes = [0]
         for j in range(i, min(i + bsz, len(feats))):
             concat_feats.append(feats[j])
             indexes.append(indexes[-1] + feats[j].shape[0])
-            if is_train:
-                concat_img_id.append(j)
         concat_feats = torch.cat(concat_feats, dim=0)
-        concat_img_id = torch.tensor(concat_img_id)
         batch_logits = []
         concat_feats = concat_feats.unsqueeze(1).unsqueeze(2).to(device)
-        for cls in range(0, num_classes, bsz):
-            disc_feats = []
-            disc_img_id = []
-            for j in range(cls, min(cls + bsz, num_classes)):
-                feats_indexes = np.where(j == labels)[0]
-                disc_feats.append(cdps_feats[j])
-                if is_train:
-                    disc_img_id.append(torch.tensor(feats_indexes))
-            if is_train:
-                disc_img_id = torch.cat(disc_img_id, dim=0)
-            disc_feats = torch.stack(disc_feats, dim=0)
-            disc_feats = disc_feats.unsqueeze(0).to(device)
+        for disc_feats, sample_locations in class_blocks:
             sim = (concat_feats * disc_feats).sum(dim=-1)
             sim_list = []
             if is_train:
-                for c_iter, concat_id in enumerate(concat_img_id):
-                    cid = torch.where(disc_img_id == concat_id)[0]
-                    if len(cid) == 0:
+                for c_iter, concat_id in enumerate(range(i, min(i + bsz, len(feats)))):
+                    location = sample_locations.get(concat_id)
+                    if location is None:
                         continue
-                    row_id = cid // fewshot
-                    col_id = cid % fewshot
+                    row_id, col_id = location
                     sim[
                         indexes[c_iter] : indexes[c_iter + 1],
                         row_id,
@@ -242,7 +262,9 @@ masked_test_feats = mask_filter(
 if args.dataset == "imagenet":
     num_classes = 1000
 else:
-    num_classes = train_labels.max() + 1
+    num_classes = int(train_labels.max().item() + 1)
+
+class_indices = [np.flatnonzero(train_labels.numpy() == cls) for cls in range(num_classes)]
 
 print("Constructing CDPS features...")
 cdps_feats = construct_cdps_feats(
@@ -254,6 +276,7 @@ cdps_feats = construct_cdps_feats(
     train_labels,
     args.topk,
     load_files=args.dataset == "imagenet",
+    class_indices=class_indices,
 )
 
 print("Computing patch logits...")
@@ -267,6 +290,7 @@ train_patch_logits = compute_patch_logits(
     labels=train_labels,
     fewshot=args.fewshot,
     topk=args.topk,
+    class_indices=class_indices,
 )
 
 test_patch_logits = compute_patch_logits(
